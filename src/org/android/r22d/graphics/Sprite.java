@@ -1,10 +1,11 @@
-package org.android.r22d;
+package org.android.r22d.graphics;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
+
 
 import android.content.res.Resources;
 

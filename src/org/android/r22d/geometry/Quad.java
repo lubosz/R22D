@@ -1,4 +1,4 @@
-package org.android.r22d;
+package org.android.r22d.geometry;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

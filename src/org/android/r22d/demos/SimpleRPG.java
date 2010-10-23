@@ -1,4 +1,6 @@
-package org.android.r22d;
+package org.android.r22d.demos;
+
+import org.android.r22d.input.TouchSurfaceView;
 
 import android.app.Activity;
 import android.opengl.GLSurfaceView;

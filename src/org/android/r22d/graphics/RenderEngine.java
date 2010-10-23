@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-package org.android.r22d;
+package org.android.r22d.graphics;
 
 import java.util.List;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+
+import org.android.r22d.R;
+import org.android.r22d.geometry.Quad;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;

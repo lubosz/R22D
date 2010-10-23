@@ -1,10 +1,12 @@
-package org.android.r22d;
+package org.android.r22d.input;
+
+import org.android.r22d.graphics.RenderEngine;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 
-class TouchSurfaceView extends GLSurfaceView {
+public class TouchSurfaceView extends GLSurfaceView {
 
     public TouchSurfaceView(Context context) {
         super(context);

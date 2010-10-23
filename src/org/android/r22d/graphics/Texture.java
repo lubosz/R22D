@@ -1,9 +1,10 @@
-package org.android.r22d;
+package org.android.r22d.graphics;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.microedition.khronos.opengles.GL10;
+
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
