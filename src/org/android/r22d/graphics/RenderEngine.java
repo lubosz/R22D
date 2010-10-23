@@ -23,6 +23,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import org.android.r22d.R;
 import org.android.r22d.geometry.Quad;
+import org.android.r22d.scene.Sprite;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
@@ -39,7 +40,7 @@ public class RenderEngine implements GLSurfaceView.Renderer{
     private int frameCounter;
     float positionX, positionY;
     float moveX, moveY;
-    GL10 gl;
+    public GL10 gl;
     List<Sprite> sprites;
 	
     public RenderEngine() {

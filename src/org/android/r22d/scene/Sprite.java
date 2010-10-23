@@ -1,4 +1,4 @@
-package org.android.r22d.graphics;
+package org.android.r22d.scene;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -6,12 +6,16 @@ import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import org.android.r22d.graphics.RenderEngine;
+import org.android.r22d.graphics.Texture;
+
 
 import android.content.res.Resources;
 
 public class Sprite {
 	
 	List<Texture> textures;
+	//TODO: 2D + 3D Vector classes!
 	float position[] = {0,0,0};
 	float rotation;
 	float scale[] = {1,1};
