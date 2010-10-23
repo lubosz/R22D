@@ -38,10 +38,8 @@ public class RenderEngine implements GLSurfaceView.Renderer{
     float moveX, moveY;
     GL10 gl;
     List<Sprite> sprites;
-    //private PhysicsWorld world;
 	
     public RenderEngine() {
-    	//this.world = world;
         
         mQuad = new Quad();
         frameCounter = 0;
@@ -102,7 +100,6 @@ public class RenderEngine implements GLSurfaceView.Renderer{
          * Create our texture. This has to be done each time the
          * surface is created.
          */
-        //int blubb[] = {R.raw.megamanstand};
         int blubb[] = {R.raw.megamanstand};
         mMegaMan = new Sprite(blubb);
         float megamanPosition[] = {0, 0, -1.1f};
@@ -144,31 +141,16 @@ public class RenderEngine implements GLSurfaceView.Renderer{
         GLU.gluLookAt(gl, 0, 0, -5, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
 
         int time = (int)(SystemClock.uptimeMillis() % 4000L) / 200;
-        //float angle = 0.090f * ((int) time);
-        //float translation = 0.00001f * (float)SystemClock.uptimeMillis();
+
         float position[] = {positionX, positionY,0};
         mMap.setPosition(position);
         mMap.draw();
-        
-
-       
         
         if (moveX == 0 && moveY == 0){
         	mMegaMan.draw();
         }else{
         	mMegaManAnim.animate(time, moveX, moveY);
         }
-        /*
-        mMap.bind();
-        gl.glPushMatrix();
-        	gl.glTranslatef(positionX, positionY,0);
-	        gl.glScalef(8f, 8f, 1);
-	        mQuad.draw(gl);
-        gl.glPopMatrix();
-        
-
-        }
-         */
         
         frameCounter++;
 

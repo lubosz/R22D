@@ -5,12 +5,9 @@ import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 
 class TouchSurfaceView extends GLSurfaceView {
-	
-    //private RenderEngine mRenderer;
 
     public TouchSurfaceView(Context context) {
         super(context);
-        //mRenderer = setContext(context);
         RenderEngine.getSingletonObject().setContext(context);
         setRenderer(RenderEngine.getSingletonObject());
         //setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
