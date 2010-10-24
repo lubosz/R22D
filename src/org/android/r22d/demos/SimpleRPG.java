@@ -38,6 +38,7 @@ public class SimpleRPG extends Activity {
         		R.raw.megaman3
         }, 100));
 		GameObject megaMan = new GameObject(
+				"megaman",
 				new float[] {0,0, -1.1f},
 				sprites,
 				new float[] {.2f, .2f});

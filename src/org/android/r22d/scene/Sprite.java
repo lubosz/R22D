@@ -15,13 +15,13 @@ import android.os.SystemClock;
 
 public class Sprite {
 	
-	List<Texture> textures = new ArrayList<Texture>();
+	public List<Texture> textures = new ArrayList<Texture>();
 	int[] assetFrames;
 	//TODO: 2D + 3D Vector classes!
 	float position[] = {0,0,0};
 	float rotation;
 	float scale[] = {1,1};
-	int animationDelay;
+	public int animationDelay;
 	
 	public Sprite(int assetFrames[]){
 		this.assetFrames = assetFrames;

@@ -9,10 +9,13 @@ import org.android.r22d.scene.SpriteTypeEnum;
 
 public class GameObject {
 
-	float position[] = {0,0,0};
-	Map<SpriteTypeEnum, Sprite> sprites = new HashMap<SpriteTypeEnum, Sprite>();
+	public String name;
+	
+	public float position[] = {0,0,0};
+	public Map<SpriteTypeEnum, Sprite> sprites = new HashMap<SpriteTypeEnum, Sprite>();
 
-	public GameObject(float[] position, Map<SpriteTypeEnum,Sprite> sprites, float[] scale){
+	public GameObject(String name, float[] position, Map<SpriteTypeEnum,Sprite> sprites, float[] scale){
+		this.name = name;
 		this.position = position;
 		this.sprites = sprites;
 		for (Entry<SpriteTypeEnum, Sprite> sprite : sprites.entrySet()) {

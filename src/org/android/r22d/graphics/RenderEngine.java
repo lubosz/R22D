@@ -18,6 +18,7 @@ package org.android.r22d.graphics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -26,6 +27,7 @@ import org.android.r22d.R;
 import org.android.r22d.demos.GameObject;
 import org.android.r22d.geometry.Quad;
 import org.android.r22d.scene.Sprite;
+import org.android.r22d.scene.SpriteTypeEnum;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
@@ -144,6 +146,7 @@ public class RenderEngine implements GLSurfaceView.Renderer{
     public void onDrawFrame(GL10 gl) {
     	positionX += moveX;
     	positionY += moveY;
+    	double movelength = Math.sqrt((moveX*moveX)+(moveY*moveY));
 
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
         
@@ -152,7 +155,7 @@ public class RenderEngine implements GLSurfaceView.Renderer{
         
         GLU.gluLookAt(gl, 0, 0, -5, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
 
-        int time = (int)(SystemClock.uptimeMillis() % 4000L) / 200;
+//        int time = (int)(SystemClock.uptimeMillis() % 4000L) / 200;
 
         float position[] = {positionX, positionY,0};
         mMap.setPosition(position);
@@ -165,6 +168,16 @@ public class RenderEngine implements GLSurfaceView.Renderer{
 //        }
         
         for (GameObject gameObject : gameObjects) {
+        	
+        	//animation speed of megaman MOVING animation dependent on moveX/moveY vector
+        	if(gameObject.name.equals("megaman"))
+        		for (Entry<SpriteTypeEnum, Sprite> sprite : gameObject.sprites.entrySet()) {
+        			if(sprite.getValue().textures.size()>1 && movelength>0)
+        				//sprite.getValue().animationDelay = (int)((500-(movelength*50000))>100?(1000-(movelength*10000)):100);
+        				sprite.getValue().animationDelay = (int)(800-(movelength*20000)); //max 0.03 min 0,003
+        		}
+        	
+        	
 			gameObject.draw(moveX, moveY);
 		}
         frameCounter++;
