@@ -28,6 +28,7 @@ import javax.vecmath.Vector3f;
 import org.android.r22d.R;
 import org.android.r22d.demos.GameObject;
 import org.android.r22d.geometry.Quad;
+import org.android.r22d.scene.Camera;
 import org.android.r22d.scene.Sprite;
 import org.android.r22d.scene.SpriteTypeEnum;
 
@@ -46,10 +47,12 @@ public class RenderEngine implements GLSurfaceView.Renderer{
     public GL10 gl;
     List<Sprite> sprites;
     public List<GameObject> gameObjects = new ArrayList<GameObject>();
+    public Camera camera;
 	
     public RenderEngine() {
         
         mQuad = new Quad();
+        camera = new Camera();
         frameCounter = 0;
         positionX = 0;
         positionY = 0;
@@ -129,7 +132,8 @@ public class RenderEngine implements GLSurfaceView.Renderer{
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
         
-        GLU.gluLookAt(gl, 0, 0, -5, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+        
+        camera.updateViewMatrix();
 
 //        int time = (int)(SystemClock.uptimeMillis() % 4000L) / 200;
 
