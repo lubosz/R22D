@@ -136,12 +136,6 @@ public class RenderEngine implements GLSurfaceView.Renderer{
         mMap.setPosition(new Vector3f(positionX, positionY,0));
         mMap.draw();
         
-//        if (moveX == 0 && moveY == 0){
-//        	mMegaMan.draw();
-//        }else{
-//        	mMegaManAnim.animate(time, moveX, moveY);
-//        }
-        
         for (GameObject gameObject : gameObjects) {
         	
         	//animation speed of megaman MOVING animation dependent on moveX/moveY vector
