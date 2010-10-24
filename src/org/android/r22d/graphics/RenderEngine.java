@@ -132,12 +132,12 @@ public class RenderEngine implements GLSurfaceView.Renderer{
 //        
         
         for (GameObject gameObject : gameObjects) {
-			gameObject.bindTextures();
+			gameObject.initTextures();
 		}
         
         mMap = new Sprite(new int[] {R.raw.map});
         mMap.setScale(new float[] {8,8});
-        mMap.bindTexture();
+        mMap.initTextures();
 
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
         gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);

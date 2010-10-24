@@ -34,9 +34,9 @@ public class GameObject {
 		sprites.get(SpriteTypeEnum.STANDING).draw();
 	}
 	
-	public void bindTextures() {
+	public void initTextures() {
 		for (Entry<SpriteTypeEnum, Sprite> sprite : sprites.entrySet()) {
-			sprite.getValue().bindTexture();
+			sprite.getValue().initTextures();
 		}
 	}
 }

@@ -32,7 +32,7 @@ public class Sprite {
 		this.animationDelay = animationDelay;
 	}
 	
-	public void bindTexture(){
+	public void initTextures(){
 		Resources recources = RenderEngine.getSingletonObject().mContext.getResources();
 		for (int asset : assetFrames){
 			InputStream is = recources.openRawResource(asset);
@@ -74,19 +74,6 @@ public class Sprite {
         gl.glScalef(scale[0], scale[1], 1);
         if (moveX < 0) gl.glRotatef(180, 0, 1.0f, 0);
         RenderEngine.getSingletonObject().mQuad.draw(gl);
-        gl.glPopMatrix();
-	}
-	
-	@Deprecated
-	public void animate(int frameCounter, float moveX, float moveY){
-		GL10 gl = RenderEngine.getSingletonObject().gl;
-		textures.get(frameCounter%textures.size()).bind();
-       
-        gl.glPushMatrix();
-    	gl.glTranslatef(position[0], position[1],position[2]);
-        gl.glScalef(scale[0], scale[1], 1);
-    	if (moveX < 0) gl.glRotatef(180, 0, 1.0f, 0);
-    	RenderEngine.getSingletonObject().mQuad.draw(gl);
         gl.glPopMatrix();
 	}
 }
