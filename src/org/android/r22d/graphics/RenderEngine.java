@@ -38,8 +38,6 @@ import android.opengl.GLU;
 public class RenderEngine implements GLSurfaceView.Renderer{
 
     public Quad mQuad;
-    private Sprite mMegaMan;
-    private Sprite mMegaManAnim;
     public Context mContext;
     private Sprite mMap;
     private int frameCounter;
@@ -81,56 +79,33 @@ public class RenderEngine implements GLSurfaceView.Renderer{
     	//Log.d("position",positionX + " "+ positionY);
     	
     }
-
-    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-    	this.gl = gl;
-        /*
-         * By default, OpenGL enables features that improve quality
-         * but reduce performance. One might want to tweak that
-         * especially on software renderer.
-         */
+    
+    private void initOpenGL(){
+    	//Optimization
         //gl.glDisable(GL10.GL_DITHER);
-
-        /*
-         * Some one-time OpenGL initialization can be made here
-         * probably based on features of this particular context
-         */
-        gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT,
-                GL10.GL_FASTEST);
-
-        gl.glClearColor(.5f, .5f, .5f, 1);
-        gl.glShadeModel(GL10.GL_SMOOTH);
-        gl.glEnable(GL10.GL_DEPTH_TEST);
-        gl.glEnable(GL10.GL_TEXTURE_2D);
+        gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_FASTEST);
         
+        //Background color
+        gl.glClearColor(.5f, .5f, .5f, 1);
+        
+        //Depth Order
+        gl.glEnable(GL10.GL_DEPTH_TEST);
+        
+        //Transparency
         gl.glEnable (GL10.GL_BLEND); 
         gl.glBlendFunc (GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 
-        /*
-         * Create our texture. This has to be done each time the
-         * surface is created.
-         */
+        //Dunno
+        //gl.glShadeModel(GL10.GL_SMOOTH);
+        gl.glEnable(GL10.GL_TEXTURE_2D);
+        gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
+        gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+    }
 
-//        int blubb[] = {R.raw.megamanstand};
-//        mMegaMan = new Sprite(blubb);
-//        float megamanPosition[] = {0, 0, -1.1f};
-//        float megamanScale[] = {.2f, .2f};
-//        
-//        mMegaMan.setPosition(megamanPosition);
-//        mMegaMan.setScale(megamanScale);
-//      
-//        int frames[] = {
-//        		R.raw.megaman0,
-//        		R.raw.megaman1,
-//        		R.raw.megaman2,
-//        		R.raw.megaman3
-//        };
-//        
-//
-//        mMegaManAnim = new Sprite(frames);
-//        mMegaManAnim.setPosition(megamanPosition);
-//        mMegaManAnim.setScale(megamanScale);
-//        
+    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+    	this.gl = gl;
+    	initOpenGL();
+    
         
         for (GameObject gameObject : gameObjects) {
 			gameObject.initTextures();
@@ -140,8 +115,6 @@ public class RenderEngine implements GLSurfaceView.Renderer{
         mMap.setScale(new Vector2f(8,8));
         mMap.initTextures();
 
-        gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
-        gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
     }
 
     public void onDrawFrame(GL10 gl) {
