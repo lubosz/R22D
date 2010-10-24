@@ -45,8 +45,6 @@ public class Sprite {
 	}
 	
 	public void draw(Vector2f move, Vector3f position, Vector2f scale){
-		//move.scale(1.5f);
-		//move(move);
 
 		GL10 gl = RenderEngine.getSingletonObject().gl;
 		if(textures.size() > 0) {
@@ -54,7 +52,6 @@ public class Sprite {
 				textures.get(0).bind();
 			else{
 		        int time = (int)(SystemClock.uptimeMillis() % 4000L);
-		        // /animationDelay;
 				textures.get(time%textures.size()).bind();
 			}
 		}

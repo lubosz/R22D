@@ -28,8 +28,13 @@ public class GameObject {
 
 	}
 	
+	public Vector2f getPosition2D(){
+		return new Vector2f(position.x, position.y);
+	}
+	
 	public void draw(Vector2f move) {
 		if(move.length() != 0){
+			move(move);
 			sprites.get(SpriteTypeEnum.MOVING).draw(move,position,scale);
 			return;
 		}

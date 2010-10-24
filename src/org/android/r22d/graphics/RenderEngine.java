@@ -123,32 +123,31 @@ public class RenderEngine implements GLSurfaceView.Renderer{
 
     public void onDrawFrame(GL10 gl) {
     	
-
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
         
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
-        
-        camera.move(move);
         camera.updateViewMatrix();
 
         mMap.draw(new Vector2f(0,0));
         
         for (GameObject gameObject : gameObjects) {
-        	
-        	gameObject.position.x = camera.position.x;
-        	gameObject.position.y = camera.position.y;
+        	if(gameObject.name.equals("megaman")){
+        		//TODO: Camera track gameobject
+        		camera.setPosition(new Vector2f(gameObject.getPosition2D()));
+        	}
 			gameObject.draw(move);
         	
 		}
+        
         frameCounter++;
 
     }
 
     public void onSurfaceChanged(GL10 gl, int w, int h) {
     	float ratio = (float) w/h;
-    	Log.d("ratio", ratio + "");
-    	Log.d("metrics", w + " " + h);
+    	Log.d("Cam Ratio", ratio + "");
+    	Log.d("Cam Metrics", w + " " + h);
         camera.setViewPort(w, h);
         camera.setPerspective(ratio);
     }
