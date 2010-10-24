@@ -10,7 +10,7 @@ import android.opengl.GLU;
 
 public class Camera {
 	
-	Vector3f position;
+	public Vector3f position;
 	Vector3f up;
 	Vector3f center;
 	GL10 gl;

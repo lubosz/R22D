@@ -18,15 +18,11 @@ public class Sprite {
 	
 	public List<Texture> textures = new ArrayList<Texture>();
 	int[] assetFrames;
-	Vector3f position;
-	float rotation;
-	Vector2f scale;
+
 	public int animationDelay;
 	
 	public Sprite(int assetFrames[]){
 		this.assetFrames = assetFrames;
-		scale = new Vector2f(1,1);
-		position = new Vector3f(0,0,0);
 		animationDelay = 1;
 	}
 	
@@ -42,45 +38,25 @@ public class Sprite {
 			textures.add(new Texture(is)); 
 		}
 	}
-	
-	public void setPosition(Vector3f position) {
-		this.position = position;
-	}
-	
-	public void setPosition(Vector2f position2d) {
-		position.x = position2d.x;
-		position.y = position2d.y;
-	}
 
 
-	public void setRotation(float rotation) {
-		this.rotation = rotation;
-	}
-
-
-	public void setScale(Vector2f scale) {
-		this.scale = scale;
-	}
-
-	public void draw(){
-		draw(new Vector2f(0,0));
+	public void draw(Vector3f position, Vector2f scale){
+		draw(new Vector2f(0,0),position, scale);
 	}
 	
-	public void move(Vector2f move){
-		this.position.x += move.x;
-		this.position.y += move.y;
-	}
-	
-	public void draw(Vector2f move){
+	public void draw(Vector2f move, Vector3f position, Vector2f scale){
+		//move.scale(1.5f);
+		//move(move);
 
 		GL10 gl = RenderEngine.getSingletonObject().gl;
 		if(textures.size() > 0) {
-		if(textures.size() < 2)
-			textures.get(0).bind();
-		else{
-	        int time = (int)(SystemClock.uptimeMillis() % 4000L) / animationDelay;
-			textures.get(time%textures.size()).bind();
-		}
+			if(textures.size() < 2)
+				textures.get(0).bind();
+			else{
+		        int time = (int)(SystemClock.uptimeMillis() % 4000L);
+		        // /animationDelay;
+				textures.get(time%textures.size()).bind();
+			}
 		}
         gl.glPushMatrix();
 	    	gl.glTranslatef(position.x, position.y,position.z);

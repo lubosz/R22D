@@ -39,7 +39,7 @@ public class RenderEngine implements GLSurfaceView.Renderer{
 
     public Quad mQuad;
     public Context mContext;
-    private Sprite mMap;
+    //private Sprite mMap;
     private int frameCounter;
     Vector2f move;
     //, position;
@@ -82,7 +82,7 @@ public class RenderEngine implements GLSurfaceView.Renderer{
         //Vector2f inversePosition = position;
         //inversePosition.negate();
         //camera.setPosition(position);
-    	camera.move(move);
+    	
     	
     }
     
@@ -119,10 +119,11 @@ public class RenderEngine implements GLSurfaceView.Renderer{
         for (GameObject gameObject : gameObjects) {
 			gameObject.initTextures();
 		}
-        
+        /*
         mMap = new Sprite(new int[] {R.raw.map});
         mMap.setScale(new Vector2f(8,8));
         mMap.initTextures();
+        */
 
     }
 
@@ -134,28 +135,33 @@ public class RenderEngine implements GLSurfaceView.Renderer{
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glLoadIdentity();
         
-        
+        camera.move(move);
         camera.updateViewMatrix();
 
 //        int time = (int)(SystemClock.uptimeMillis() % 4000L) / 200;
 
 
         //mMap.setPosition(new Vector3f(positionX, positionY,0));
-        mMap.draw();
+        //mMap.draw();
         
         for (GameObject gameObject : gameObjects) {
         	
         	//animation speed of megaman MOVING animation dependent on moveX/moveY vector
         	if(gameObject.name.equals("megaman"))
+        	//move.scale(1.5f);
+        	/*
         		for (Entry<SpriteTypeEnum, Sprite> sprite : gameObject.sprites.entrySet()) {
-        			sprite.getValue().move(move);
-        			if(sprite.getValue().textures.size()>1 && move.length()>0)
+        			
+        			//sprite.getValue().move(move);
+        			//if(sprite.getValue().textures.size()>1 && move.length()>0)
         				//sprite.getValue().animationDelay = (int)((500-(movelength*50000))>100?(1000-(movelength*10000)):100);
-        				sprite.getValue().animationDelay = (int)(800-(move.length()*20000)); //max 0.03 min 0,003
+        				//sprite.getValue().animationDelay = (int)(800-(move.length()*20000)); //max 0.03 min 0,003
         		}
+        	*/
         	
-        	
+        	gameObject.position = camera.position;
 			gameObject.draw(move);
+        	
 		}
         frameCounter++;
 
