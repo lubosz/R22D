@@ -1,5 +1,6 @@
 package org.android.r22d.scene;
 
+import javax.vecmath.Vector2f;
 import javax.vecmath.Vector3f;
 
 import org.android.r22d.graphics.RenderEngine;
@@ -17,6 +18,22 @@ public class Camera {
 		center = new Vector3f(0,0,0);
 		position = new Vector3f(0,0,-5);
 		
+	}
+	
+	public void setPosition(Vector2f position2D){
+		position.x = position2D.x;
+		position.y = position2D.y;
+		
+		center.x = position2D.x;
+		center.y = position2D.y;
+	}
+	
+	public void move(Vector2f move){
+		this.position.x += move.x;
+		this.position.y += move.y;
+		
+		this.center.x += move.x;
+		this.center.y += move.y;
 	}
 
 	public void updateViewMatrix(){

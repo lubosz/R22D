@@ -45,6 +45,11 @@ public class Sprite {
 	public void setPosition(Vector3f position) {
 		this.position = position;
 	}
+	
+	public void setPosition(Vector2f position2d) {
+		position.x = position2d.x;
+		position.y = position2d.y;
+	}
 
 
 	public void setRotation(float rotation) {
@@ -57,10 +62,15 @@ public class Sprite {
 	}
 
 	public void draw(){
-		draw(0,0);
+		draw(new Vector2f(0,0));
 	}
 	
-	public void draw(float moveX, float moveY){
+	public void move(Vector2f move){
+		this.position.x += move.x;
+		this.position.y += move.y;
+	}
+	
+	public void draw(Vector2f move){
 
 		GL10 gl = RenderEngine.getSingletonObject().gl;
 		if(textures.size() > 0) {
@@ -74,7 +84,7 @@ public class Sprite {
         gl.glPushMatrix();
     	gl.glTranslatef(position.x, position.y,position.z);
         gl.glScalef(scale.x, scale.y, 1);
-        if (moveX < 0) gl.glRotatef(180, 0, 1.0f, 0);
+        if (move.x < 0) gl.glRotatef(180, 0, 1.0f, 0);
         RenderEngine.getSingletonObject().mQuad.draw(gl);
         gl.glPopMatrix();
 	}

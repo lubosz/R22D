@@ -1,5 +1,7 @@
 package org.android.r22d.input;
 
+import javax.vecmath.Vector2f;
+
 import org.android.r22d.graphics.RenderEngine;
 
 import android.content.Context;
@@ -22,10 +24,10 @@ public class TouchSurfaceView extends GLSurfaceView {
         switch (e.getAction()) {
         	case MotionEvent.ACTION_DOWN:
         	case MotionEvent.ACTION_MOVE:
-        		RenderEngine.getSingletonObject().move(x*.0001f, y*.0001f);
+        		RenderEngine.getSingletonObject().setMove(new Vector2f(x*.0001f, y*.0001f));
 	            break;
         	case MotionEvent.ACTION_UP:
-        		RenderEngine.getSingletonObject().move(0, 0);
+        		RenderEngine.getSingletonObject().setMove(new Vector2f(0, 0));
 	            break;
 	        default:
 	        	break;

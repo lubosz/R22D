@@ -28,9 +28,9 @@ public class GameObject {
 		}
 	}
 	
-	public void draw(float moveX, float moveY) {
-		if(moveX != 0 || moveY != 0){
-			sprites.get(SpriteTypeEnum.MOVING).draw(moveX, moveY);
+	public void draw(Vector2f move) {
+		if(move.length() != 0){
+			sprites.get(SpriteTypeEnum.MOVING).draw(move);
 			return;
 		}
 		
