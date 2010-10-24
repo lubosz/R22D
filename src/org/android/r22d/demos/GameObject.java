@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.vecmath.Vector2f;
+import javax.vecmath.Vector3f;
+
 import org.android.r22d.scene.Sprite;
 import org.android.r22d.scene.SpriteTypeEnum;
 
@@ -11,10 +14,10 @@ public class GameObject {
 
 	public String name;
 	
-	public float position[] = {0,0,0};
+	Vector3f position;
 	public Map<SpriteTypeEnum, Sprite> sprites = new HashMap<SpriteTypeEnum, Sprite>();
 
-	public GameObject(String name, float[] position, Map<SpriteTypeEnum,Sprite> sprites, float[] scale){
+	public GameObject(String name, Vector3f position, Map<SpriteTypeEnum,Sprite> sprites, Vector2f scale){
 		this.name = name;
 		this.position = position;
 		this.sprites = sprites;

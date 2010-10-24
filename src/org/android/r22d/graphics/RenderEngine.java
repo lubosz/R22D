@@ -22,6 +22,8 @@ import java.util.Map.Entry;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+import javax.vecmath.Vector2f;
+import javax.vecmath.Vector3f;
 
 import org.android.r22d.R;
 import org.android.r22d.demos.GameObject;
@@ -32,7 +34,6 @@ import org.android.r22d.scene.SpriteTypeEnum;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLU;
-import android.os.SystemClock;
 
 public class RenderEngine implements GLSurfaceView.Renderer{
 
@@ -136,7 +137,7 @@ public class RenderEngine implements GLSurfaceView.Renderer{
 		}
         
         mMap = new Sprite(new int[] {R.raw.map});
-        mMap.setScale(new float[] {8,8});
+        mMap.setScale(new Vector2f(8,8));
         mMap.initTextures();
 
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
@@ -157,8 +158,7 @@ public class RenderEngine implements GLSurfaceView.Renderer{
 
 //        int time = (int)(SystemClock.uptimeMillis() % 4000L) / 200;
 
-        float position[] = {positionX, positionY,0};
-        mMap.setPosition(position);
+        mMap.setPosition(new Vector3f(positionX, positionY,0));
         mMap.draw();
         
 //        if (moveX == 0 && moveY == 0){

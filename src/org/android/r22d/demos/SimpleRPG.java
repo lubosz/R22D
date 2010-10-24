@@ -3,6 +3,9 @@ package org.android.r22d.demos;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.vecmath.Vector2f;
+import javax.vecmath.Vector3f;
+
 import org.android.r22d.R;
 import org.android.r22d.graphics.RenderEngine;
 import org.android.r22d.input.TouchSurfaceView;
@@ -39,9 +42,10 @@ public class SimpleRPG extends Activity {
         }, 100));
 		GameObject megaMan = new GameObject(
 				"megaman",
-				new float[] {0,0, -1.1f},
+				new Vector3f(0,0, -1.1f),
 				sprites,
-				new float[] {.2f, .2f});
+				new Vector2f(.2f, .2f)
+				);
 		
 		RenderEngine.getSingletonObject().gameObjects.add(megaMan);
 	}

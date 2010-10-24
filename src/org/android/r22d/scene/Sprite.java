@@ -5,26 +5,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
+import javax.vecmath.Vector2f;
+import javax.vecmath.Vector3f;
 
 import org.android.r22d.graphics.RenderEngine;
 import org.android.r22d.graphics.Texture;
 
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.os.SystemClock;
 
 public class Sprite {
 	
 	public List<Texture> textures = new ArrayList<Texture>();
 	int[] assetFrames;
-	//TODO: 2D + 3D Vector classes!
-	float position[] = {0,0,0};
+	Vector3f position;
 	float rotation;
-	float scale[] = {1,1};
+	Vector2f scale;
 	public int animationDelay;
 	
 	public Sprite(int assetFrames[]){
 		this.assetFrames = assetFrames;
+		scale = new Vector2f(1,1);
+		position = new Vector3f(0,0,0);
 	}
 	
 	public Sprite(int assetFrames[], int animationDelay){
@@ -40,7 +42,7 @@ public class Sprite {
 		}
 	}
 	
-	public void setPosition(float[] position) {
+	public void setPosition(Vector3f position) {
 		this.position = position;
 	}
 
@@ -50,7 +52,7 @@ public class Sprite {
 	}
 
 
-	public void setScale(float[] scale) {
+	public void setScale(Vector2f scale) {
 		this.scale = scale;
 	}
 
@@ -70,8 +72,8 @@ public class Sprite {
 		}
 		}
         gl.glPushMatrix();
-    	gl.glTranslatef(position[0], position[1],position[2]);
-        gl.glScalef(scale[0], scale[1], 1);
+    	gl.glTranslatef(position.x, position.y,position.z);
+        gl.glScalef(scale.x, scale.y, 1);
         if (moveX < 0) gl.glRotatef(180, 0, 1.0f, 0);
         RenderEngine.getSingletonObject().mQuad.draw(gl);
         gl.glPopMatrix();
