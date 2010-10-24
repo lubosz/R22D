@@ -82,7 +82,7 @@ public class RenderEngine implements GLSurfaceView.Renderer{
     
     private void initOpenGL(){
     	//Optimization
-        //gl.glDisable(GL10.GL_DITHER);
+        gl.glDisable(GL10.GL_DITHER);
         gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_FASTEST);
         
         //Background color
@@ -95,9 +95,11 @@ public class RenderEngine implements GLSurfaceView.Renderer{
         gl.glEnable (GL10.GL_BLEND); 
         gl.glBlendFunc (GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 
-        //Dunno
+        //Does not seem to be needed
         //gl.glShadeModel(GL10.GL_SMOOTH);
-        gl.glEnable(GL10.GL_TEXTURE_2D);
+        //gl.glEnable(GL10.GL_TEXTURE_2D);
+        
+        //Enable client states for meshes
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
         gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
     }
