@@ -33,6 +33,7 @@ import org.android.r22d.scene.SpriteTypeEnum;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
+import android.util.Log;
 
 public class RenderEngine implements GLSurfaceView.Renderer{
 
@@ -50,7 +51,7 @@ public class RenderEngine implements GLSurfaceView.Renderer{
     public RenderEngine() {
         
         mQuad = new Quad();
-        camera = new Camera();
+        
         frameCounter = 0;
         move = new Vector2f(0,0);
         //position = new Vector2f(0,0);
@@ -111,6 +112,7 @@ public class RenderEngine implements GLSurfaceView.Renderer{
 
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
     	this.gl = gl;
+    	camera = new Camera(gl);
     	initOpenGL();
     
         
@@ -160,19 +162,11 @@ public class RenderEngine implements GLSurfaceView.Renderer{
     }
 
     public void onSurfaceChanged(GL10 gl, int w, int h) {
-        gl.glViewport(0, 0, w, h);
-
-        /*
-        * Set our projection matrix. This doesn't have to be done
-        * each time we draw, but usually a new projection needs to
-        * be set when the viewport is resized.
-        */
-
-        float ratio = (float) w / h;
-        gl.glMatrixMode(GL10.GL_PROJECTION);
-        gl.glLoadIdentity();
-        gl.glFrustumf(-ratio, ratio, -1, 1, 3, 7);
-
+    	float ratio = (float) w/h;
+    	Log.d("ratio", ratio + "");
+    	Log.d("metrics", w + " " + h);
+        camera.setViewPort(w, h);
+        camera.setPerspective(ratio);
     }
 
 }

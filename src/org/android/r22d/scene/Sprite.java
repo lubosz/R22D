@@ -27,6 +27,7 @@ public class Sprite {
 		this.assetFrames = assetFrames;
 		scale = new Vector2f(1,1);
 		position = new Vector3f(0,0,0);
+		animationDelay = 1;
 	}
 	
 	public Sprite(int assetFrames[], int animationDelay){
@@ -82,10 +83,10 @@ public class Sprite {
 		}
 		}
         gl.glPushMatrix();
-    	gl.glTranslatef(position.x, position.y,position.z);
-        gl.glScalef(scale.x, scale.y, 1);
-        if (move.x < 0) gl.glRotatef(180, 0, 1.0f, 0);
-        RenderEngine.getSingletonObject().mQuad.draw(gl);
+	    	gl.glTranslatef(position.x, position.y,position.z);
+	        gl.glScalef(scale.x, scale.y, 1);
+	        if (move.x > 0) gl.glRotatef(180, 0, 1.0f, 0);
+	        RenderEngine.getSingletonObject().mQuad.draw(gl);
         gl.glPopMatrix();
 	}
 }
