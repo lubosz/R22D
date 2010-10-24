@@ -16,12 +16,14 @@
 
 package org.android.r22d.graphics;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import org.android.r22d.R;
+import org.android.r22d.demos.GameObject;
 import org.android.r22d.geometry.Quad;
 import org.android.r22d.scene.Sprite;
 
@@ -42,6 +44,7 @@ public class RenderEngine implements GLSurfaceView.Renderer{
     float moveX, moveY;
     public GL10 gl;
     List<Sprite> sprites;
+    public List<GameObject> gameObjects = new ArrayList<GameObject>();
 	
     public RenderEngine() {
         
@@ -104,30 +107,35 @@ public class RenderEngine implements GLSurfaceView.Renderer{
          * Create our texture. This has to be done each time the
          * surface is created.
          */
-        int blubb[] = {R.raw.megamanstand};
-        mMegaMan = new Sprite(blubb);
-        float megamanPosition[] = {0, 0, -1.1f};
-        float megamanScale[] = {.2f, .2f};
-        
-        mMegaMan.setPosition(megamanPosition);
-        mMegaMan.setScale(megamanScale);
-      
-        int frames[] = {
-        		R.raw.megaman0,
-        		R.raw.megaman1,
-        		R.raw.megaman2,
-        		R.raw.megaman3
-        };
-        
 
-        mMegaManAnim = new Sprite(frames);
-        mMegaManAnim.setPosition(megamanPosition);
-        mMegaManAnim.setScale(megamanScale);
+//        int blubb[] = {R.raw.megamanstand};
+//        mMegaMan = new Sprite(blubb);
+//        float megamanPosition[] = {0, 0, -1.1f};
+//        float megamanScale[] = {.2f, .2f};
+//        
+//        mMegaMan.setPosition(megamanPosition);
+//        mMegaMan.setScale(megamanScale);
+//      
+//        int frames[] = {
+//        		R.raw.megaman0,
+//        		R.raw.megaman1,
+//        		R.raw.megaman2,
+//        		R.raw.megaman3
+//        };
+//        
+//
+//        mMegaManAnim = new Sprite(frames);
+//        mMegaManAnim.setPosition(megamanPosition);
+//        mMegaManAnim.setScale(megamanScale);
+//        
         
-        int blubb3[] = {R.raw.map};
-        mMap = new Sprite(blubb3);
-        float mapScale[] = {8,8};
-        mMap.setScale(mapScale);
+        for (GameObject gameObject : gameObjects) {
+			gameObject.bindTextures();
+		}
+        
+        mMap = new Sprite(new int[] {R.raw.map});
+        mMap.setScale(new float[] {8,8});
+        mMap.bindTexture();
 
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
         gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
@@ -150,12 +158,15 @@ public class RenderEngine implements GLSurfaceView.Renderer{
         mMap.setPosition(position);
         mMap.draw();
         
-        if (moveX == 0 && moveY == 0){
-        	mMegaMan.draw();
-        }else{
-        	mMegaManAnim.animate(time, moveX, moveY);
-        }
+//        if (moveX == 0 && moveY == 0){
+//        	mMegaMan.draw();
+//        }else{
+//        	mMegaManAnim.animate(time, moveX, moveY);
+//        }
         
+        for (GameObject gameObject : gameObjects) {
+			gameObject.draw(moveX, moveY);
+		}
         frameCounter++;
 
     }
