@@ -21,7 +21,7 @@ public class GameObject {
 	public Map<SpriteTypeEnum, Sprite> sprites = new HashMap<SpriteTypeEnum, Sprite>();
 
 	public GameObject(String name, Vector3f position, Map<SpriteTypeEnum,Sprite> sprites, Vector2f scale){
-		this.scale = new Vector2f(1,1);
+		this.scale = scale;
 		this.name = name;
 		this.position = position;
 		this.sprites = sprites;

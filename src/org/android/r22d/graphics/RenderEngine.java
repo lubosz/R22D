@@ -17,14 +17,16 @@
 package org.android.r22d.graphics;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Map;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 import javax.vecmath.Vector2f;
 
 import org.android.r22d.R;
+import org.android.r22d.demos.Area;
 import org.android.r22d.demos.GameObject;
 import org.android.r22d.geometry.Quad;
 import org.android.r22d.scene.Camera;
@@ -39,10 +41,9 @@ public class RenderEngine implements GLSurfaceView.Renderer{
 
     public Quad mQuad;
     public Context mContext;
-    //private Sprite mMap;
+    private Area mMap;
     private int frameCounter;
     Vector2f move;
-    //, position;
     public GL10 gl;
     List<Sprite> sprites;
     public List<GameObject> gameObjects = new ArrayList<GameObject>();
@@ -54,7 +55,10 @@ public class RenderEngine implements GLSurfaceView.Renderer{
         
         frameCounter = 0;
         move = new Vector2f(0,0);
-        //position = new Vector2f(0,0);
+        
+		Map<SpriteTypeEnum, Sprite> sprites = new HashMap<SpriteTypeEnum, Sprite>();
+		sprites.put(SpriteTypeEnum.STANDING, new Sprite(new int[] {R.raw.map}));
+        mMap = new Area(sprites);
        
     }
     
@@ -76,13 +80,6 @@ public class RenderEngine implements GLSurfaceView.Renderer{
     public void setMove(Vector2f move){
     	this.move = move;
     	move.negate();
-    	//position.add(move);
-    	//Log.d("position",positionX + " "+ positionY);
-        //TODO: Shorter syntax?
-        //Vector2f inversePosition = position;
-        //inversePosition.negate();
-        //camera.setPosition(position);
-    	
     	
     }
     
@@ -119,11 +116,8 @@ public class RenderEngine implements GLSurfaceView.Renderer{
         for (GameObject gameObject : gameObjects) {
 			gameObject.initTextures();
 		}
-        /*
-        mMap = new Sprite(new int[] {R.raw.map});
-        mMap.setScale(new Vector2f(8,8));
+
         mMap.initTextures();
-        */
 
     }
 
@@ -138,28 +132,12 @@ public class RenderEngine implements GLSurfaceView.Renderer{
         camera.move(move);
         camera.updateViewMatrix();
 
-//        int time = (int)(SystemClock.uptimeMillis() % 4000L) / 200;
-
-
-        //mMap.setPosition(new Vector3f(positionX, positionY,0));
-        //mMap.draw();
+        mMap.draw(new Vector2f(0,0));
         
         for (GameObject gameObject : gameObjects) {
         	
-        	//animation speed of megaman MOVING animation dependent on moveX/moveY vector
-        	if(gameObject.name.equals("megaman"))
-        	//move.scale(1.5f);
-        	/*
-        		for (Entry<SpriteTypeEnum, Sprite> sprite : gameObject.sprites.entrySet()) {
-        			
-        			//sprite.getValue().move(move);
-        			//if(sprite.getValue().textures.size()>1 && move.length()>0)
-        				//sprite.getValue().animationDelay = (int)((500-(movelength*50000))>100?(1000-(movelength*10000)):100);
-        				//sprite.getValue().animationDelay = (int)(800-(move.length()*20000)); //max 0.03 min 0,003
-        		}
-        	*/
-        	
-        	gameObject.position = camera.position;
+        	gameObject.position.x = camera.position.x;
+        	gameObject.position.y = camera.position.y;
 			gameObject.draw(move);
         	
 		}
